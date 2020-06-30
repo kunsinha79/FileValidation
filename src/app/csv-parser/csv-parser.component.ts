@@ -41,9 +41,9 @@ export class CsvParserComponent {
 
   @ViewChild('fileImportInput', { static: false }) fileImportInput: any;
 
-  fileChangeListener($event): void {
+  fileChangeListener($event: any): void {
     this.errorList = [];
-    const files = $event.srcElement.files;
+    const files = $event.target.files;
 
     if (files[0].type !== 'text/xml') {
       this.parseCSV(files[0]);
@@ -54,11 +54,10 @@ export class CsvParserComponent {
     }
   }
 
-  parseCSV = (file: any) => {
+  parseCSV = (file) => {
     this.ngxCsvParser.parse(file, { header: this.header, delimiter: this.delimiter })
       .pipe().subscribe((result: Array<any>) => {
         this.isParseCSVError = false;
-
         this.parserUtilService.parseKeys(result).subscribe( (parsedResult: iRecord[]) => {
           this.records = parsedResult;
           this.validateRecords();
