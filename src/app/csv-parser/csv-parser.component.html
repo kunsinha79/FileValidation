@@ -1,0 +1,47 @@
+<div class="content">
+  <mat-form-field class="form-width">
+    <input matInput placeholder="Please select file to validate:" readonly>
+    <button mat-button matSuffix mat-icon-button aria-label="Choose" (click)="fileImportInput.click()">
+      <mat-icon>folder_open</mat-icon>
+    </button>
+  </mat-form-field>
+  <input hidden (change)="fileChangeListener($event)" #fileImportInput type="file" id="file" accept=".csv, .xml">
+
+  <div *ngIf="errorList.length > 0; else instruction">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="reference">
+        <th mat-header-cell *matHeaderCellDef> Reference </th>
+        <td mat-cell *matCellDef="let element"> {{element.reference}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="reason">
+        <th mat-header-cell *matHeaderCellDef> Reason </th>
+        <td mat-cell *matCellDef="let element"> {{element.reason}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+  <ng-template #instruction>
+    <div *ngIf="isValid">
+      No validation errors found
+    </div>
+
+    <div *ngIf="isParseCSVError">
+      Error in parsing CSV.
+    </div>
+
+    <div *ngIf="isParseXMLError">
+      Error in parsing XML.
+    </div>
+  </ng-template>
+
+</div>
