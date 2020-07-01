@@ -97,17 +97,21 @@ export const errorListMock = [
   {
     "reference": 156108,
     "description": "Flowers van Robin",
-    "reason": "Duplicate Records"
+    "reason": "Duplicate Record"
   },
   {
     "reference": 156108,
     "description": "Flowers from Erik de Vries",
-    "reason": "Duplicate Records"
+    "reason": "Duplicate Record"
+  },
+  {
+    "reference": 156108,
+    "description": "Flowers van Robin",
+    "reason": "End Balance mismatch. Expected 16.00 but found 6.92"
   },
   {
     "reference": 156108,
     "description": "Flowers from Erik de Vries",
-    "reason": "End Balance mismatch. Expected 13.92 but found 9.00"
-  },
-
+    "reason": "End Balance mismatch. Expected 6.67 but found 21.17"
+  }
 ]

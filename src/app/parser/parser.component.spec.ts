@@ -123,9 +123,9 @@ describe('ParserComponent', () => {
   });
   // end XML parsing test
 
-  it('should have 3 error records in errorList when validateRecords() is invoked with invalid records', () => {
+  it('should have 4 error records in errorList when validateRecords() is invoked with invalid records', () => {
     spyOn(validatorService, 'validateDuplicates').and.returnValue([errorListMock[0], errorListMock[1]]);
-    spyOn(validatorService, 'validateEndBalance').and.returnValue([errorListMock[2]]);
+    spyOn(validatorService, 'validateEndBalance').and.returnValue([errorListMock[2], errorListMock[3]]);
 
     component.records = parsedCsvXmlMock;
     component.validateRecords();
@@ -133,6 +133,7 @@ describe('ParserComponent', () => {
     expect(validatorService.validateDuplicates).toHaveBeenCalled();
     expect(validatorService.validateEndBalance).toHaveBeenCalled();
     expect(component.errorList).toEqual(errorListMock);
+    expect(component.errorList.length).toEqual(4);
   });
 
   it('should have 0 error records in errorList when validateRecords() is invoked with valid records', () => {

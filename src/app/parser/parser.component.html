@@ -1,11 +1,14 @@
-<div class="content">
-  <mat-form-field class="form-width">
-    <input matInput placeholder="Please select file to validate:" readonly>
-    <button mat-button matSuffix mat-icon-button aria-label="Choose" (click)="fileImportInput.click()">
-      <mat-icon>folder_open</mat-icon>
-    </button>
-  </mat-form-field>
-  <input hidden (change)="fileChangeListener($event)" #fileImportInput type="file" id="file" accept=".csv, .xml">
+<div class="parser-component">
+  <div class="content">
+    <h3> Please pick a file to validate duplicate entry or calculation errors. Supported formats .xml, .csv</h3>
+    <mat-form-field class="form-width">
+      <input matInput placeholder="Please select file to validate (.csv/.xml)" readonly>
+      <button mat-button matSuffix mat-icon-button aria-label="Choose" (click)="fileImportInput.click()">
+        <mat-icon>folder_open</mat-icon>
+      </button>
+    </mat-form-field>
+    <input hidden (change)="fileChangeListener($event)" #fileImportInput type="file" id="file" accept=".csv, .xml">
+  </div>
 
   <div *ngIf="errorList.length > 0; else instruction">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -32,15 +35,15 @@
 
   <ng-template #instruction>
     <div *ngIf="isValid">
-      No validation errors found
+      <h3>{{errorMessages.inValid}}</h3>
     </div>
 
     <div *ngIf="isParseCSVError">
-      Error in parsing CSV.
+      <h3>{{errorMessages.csvError}}</h3>
     </div>
 
     <div *ngIf="isParseXMLError">
-      Error in parsing XML.
+      <h3>{{errorMessages.xmlError}}</h3>
     </div>
   </ng-template>
 

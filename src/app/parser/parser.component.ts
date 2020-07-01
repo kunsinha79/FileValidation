@@ -31,6 +31,12 @@ export class ParserComponent {
 
   displayedColumns: string[] = ['reference', 'description', 'reason'];
 
+  errorMessages = {
+    inValid: 'No validation errors found.',
+    csvError: 'Error in parsing CSV.',
+    xmlError: 'Error in parsing XML.'
+  }
+
   constructor(
     private ngxCsvParser: NgxCsvParser,
     private ngxXml2jsonService: NgxXml2jsonService,

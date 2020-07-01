@@ -13,7 +13,6 @@ export class ParserUtilService {
       return of(records.reduce( (acc, record) => {
         acc.push( Object.keys(record).reduce( (recordAcc, key) => {
           const camelCaseKey = this.toCamelCase(key);
-          console.log(key, ':', camelCaseKey);
           recordAcc[camelCaseKey] = record[key];
           return recordAcc;
         }, {}));
