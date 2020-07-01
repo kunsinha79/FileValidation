@@ -8,31 +8,41 @@ import { iRecordJSON, iRecord, iRecordXML } from '../parser.types';
 })
 export class ParserUtilService {
 
-  parseKeys = (arr: iRecordJSON[]): Observable<iRecord[]> => {
-    return of(arr.reduce( (acc, item) => {
-      acc.push( Object.keys(item).reduce( (a, b) => {
-        const camelCaseKey = this.toCamelCase(b);
-        a[camelCaseKey] = item[b];
-        return a;
-      }, {}));
-      return acc;
-    }, []));
+  parseKeys = (records: iRecordJSON[]): Observable<iRecord[]> => {
+    try {
+      return of(records.reduce( (acc, record) => {
+        acc.push( Object.keys(record).reduce( (recordAcc, key) => {
+          const camelCaseKey = this.toCamelCase(key);
+          console.log(key, ':', camelCaseKey);
+          recordAcc[camelCaseKey] = record[key];
+          return recordAcc;
+        }, {}));
+        return acc;
+      }, []));
+    } catch (err){
+      return of([]);
+    }
+
   }
 
-  parseXMLKeys = (arr: iRecordXML[]): Observable<iRecord[]> => {
-    return of(arr.reduce( (acc, item) => {
-      acc.push( Object.keys(item).reduce( (a, b) => {
-        if(b !== '#text'){
-          if( b === '@attributes') {
-            Object.assign(a, item[b]);
-          } else {
-            a[b] = item[b];
+  parseXMLKeys = (records: iRecordXML[]): Observable<iRecord[]> => {
+    try {
+      return of(records.reduce( (acc, record) => {
+        acc.push( Object.keys(record).reduce( (recordAcc, key) => {
+          if(key !== '#text'){
+            if( key === '@attributes') {
+              Object.assign(recordAcc, record[key]);
+            } else {
+              recordAcc[key] = record[key];
+            }
           }
-        }
-        return a;
-      }, {}));
-      return acc;
-    }, []));
+          return recordAcc;
+        }, {}));
+        return acc;
+      }, []));
+    } catch (err) {
+      return of([]);
+    }
   }
 
   toCamelCase(sentenceCase: string) {

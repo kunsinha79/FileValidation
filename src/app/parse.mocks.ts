@@ -4,7 +4,7 @@ export const csvMock = [
     "Description": "Flowers van Robin",
     "End Balance": "16.00",
     "Mutation": "-7.00",
-    "Reference": "156108",
+    "Reference": 156108,
     "Start Balance": "13.92",
   },
   {
@@ -12,26 +12,45 @@ export const csvMock = [
     "Description": "Flowers from Erik de Vries",
     "End Balance": "6.67",
     "Mutation": "+7.25",
-    "Reference": "156108",
+    "Reference": 156108,
     "Start Balance": "13.92",
   }
 ];
 
+export const xmlFromFileMock = `
+  <records>
+    <record reference="156108">
+      <accountNumber>NL69ABNA0433647324</accountNumber>
+      <description>Flowers van Robin</description>
+      <startBalance>16.00</startBalance>
+      <mutation>-7.00</mutation>
+      <endBalance>13.92</endBalance>
+    </record>
+    <record reference="156108">
+      <accountNumber>NL69ABNA0433647324</accountNumber>
+      <description>Flowers from Erik de Vries</description>
+      <startBalance>6.67</startBalance>
+      <mutation>+7.25</mutation>
+      <endBalance>13.92</endBalance>
+    </record>
+  </records>
+`;
+
 export const xmlMock = [
   {
+    "@attributes": {"reference": 156108},
     "accountNumber": "NL69ABNA0433647324",
     "description": "Flowers van Robin",
     "endBalance": "16.00",
     "mutation": "-7.00",
-    "@attribute": {"reference": 156108},
     "startBalance": "13.92",
   },
   {
+    "@attributes": {"reference": 156108},
     "accountNumber": "NL69ABNA0433647324",
     "description": "Flowers from Erik de Vries",
     "endBalance": "6.67",
     "mutation": "+7.25",
-    "@attribute": {"reference": 156108},
     "startBalance": "13.92",
   }
 ];

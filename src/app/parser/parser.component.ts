@@ -66,13 +66,14 @@ export class ParserComponent {
         });
       }, (error: NgxCSVParserError) => {
         this.isParseCSVError = true;
+        this.records = [];
       });
   }
 
-  parseXML = (event: any) => {
+  parseXML = ({target: {result}}) => {
     try {
       const parser = new DOMParser();
-      const xml = parser.parseFromString(event.target.result, 'text/xml');
+      const xml = parser.parseFromString(result, 'text/xml');
       const xmlRecords: iXMLParseRecords = <iXMLParseRecords>this.ngxXml2jsonService.xmlToJson(xml);
       this.isParseXMLError = false;
 

@@ -14,7 +14,7 @@ export interface iErrorType {
 }
 
 export interface iRecordJSON {
-  "Reference": number;
+  'Reference': number;
   'Account Number': string;
   'Description': string;
   'End Balance': string;
@@ -24,7 +24,7 @@ export interface iRecordJSON {
 
 
 export interface iRecordXML {
-  '@attribute': {'reference': number};
+  '@attributes': {'reference': number};
   'accountNumber': string;
   'description': string;
   'endBalance': string;
