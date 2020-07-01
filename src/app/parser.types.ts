@@ -10,7 +10,7 @@ export interface iRecord {
 export interface iErrorType {
   reference: number;
   description: string;
-  reason: number;
+  reason: string;
 }
 
 export interface iRecordJSON {

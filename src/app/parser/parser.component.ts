@@ -5,7 +5,7 @@ import { NgxCsvParser } from 'ngx-csv-parser';
 import { NgxCSVParserError } from 'ngx-csv-parser';
 import { NgxXml2jsonService } from 'ngx-xml2json';
 
-import { ValidatorServiceService } from '../validator/validator-service.service';
+import { ValidatorService } from '../validator/validator.service';
 import { ParserUtilService } from '../parser-util/parser-util.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { iRecord, iErrorType, iXMLParseRecords } from '../parser.types';
@@ -13,10 +13,10 @@ import { iRecord, iErrorType, iXMLParseRecords } from '../parser.types';
 
 @Component({
   selector: 'app-csv-parser',
-  templateUrl: './csv-parser.component.html',
-  styleUrls: ['./csv-parser.component.scss']
+  templateUrl: './parser.component.html',
+  styleUrls: ['./parser.component.scss']
 })
-export class CsvParserComponent {
+export class ParserComponent {
   records: iRecord[] = [];
   errorList: iErrorType[] = [];
   dataSource: any;
@@ -34,16 +34,15 @@ export class CsvParserComponent {
   constructor(
     private ngxCsvParser: NgxCsvParser,
     private ngxXml2jsonService: NgxXml2jsonService,
-    private validatorService: ValidatorServiceService,
+    private validatorService: ValidatorService,
     private parserUtilService: ParserUtilService
     ) {}
 
 
   @ViewChild('fileImportInput', { static: false }) fileImportInput: any;
 
-  fileChangeListener($event: any): void {
+  fileChangeListener({target: {files}}) {
     this.errorList = [];
-    const files = $event.target.files;
 
     if (files[0].type !== 'text/xml') {
       this.parseCSV(files[0]);
@@ -54,7 +53,7 @@ export class CsvParserComponent {
     }
   }
 
-  parseCSV = (file) => {
+  parseCSV = (file: File) => {
     this.ngxCsvParser.parse(file, { header: this.header, delimiter: this.delimiter })
       .pipe().subscribe((result: Array<any>) => {
         this.isParseCSVError = false;

@@ -5,7 +5,7 @@ import { iRecord } from '../parser.types';
 @Injectable({
   providedIn: 'root'
 })
-export class ValidatorServiceService {
+export class ValidatorService {
 
   constructor() { }
 

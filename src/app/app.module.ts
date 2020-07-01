@@ -12,13 +12,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CsvParserComponent } from './csv-parser/csv-parser.component';
-import { ValidatorServiceService } from './validator/validator-service.service';
+import { ParserComponent } from './parser/parser.component';
+import { ValidatorService } from './validator/validator.service';
+import { ParserUtilService } from './parser-util/parser-util.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CsvParserComponent
+    ParserComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,10 @@ import { ValidatorServiceService } from './validator/validator-service.service';
     MatIconModule,
     MatToolbarModule
   ],
-  providers: [ValidatorServiceService],
+  providers: [
+    ValidatorService,
+    ParserUtilService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
