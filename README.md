@@ -1,5 +1,5 @@
 # FileValidator
-An application to upload csv ot xml file in a prticular format and report invalid transactions
+An application to upload csv or xml file in a prticular format and report invalid transactions
 # Case Study
 An organization received csv or xml files of transaction records. 
 Before moving further to bulk uploading, a utility is needed to verify the records for
